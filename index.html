@@ -121,6 +121,11 @@ footer .links a{color:var(--purple-2);font-weight:700;font-size:14.5px;margin-le
   .sec-head h2{font-size:32px}.final h2{font-size:34px}section{padding:58px 0}
 }
 @media(max-width:480px){.value-grid{grid-template-columns:1fr}nav .btn{display:none}}
+/* Device-aware CTAs: small Apple glyph inside primary buttons, subtle "or try in browser" link beside them. */
+.btn .ic-apple{width:1.05em;height:1.05em;margin-top:-2px;flex-shrink:0}
+.cta-web{color:var(--purple-2);font-weight:700;font-size:15.5px;opacity:.82;border-bottom:1px solid rgba(123,79,212,.4);padding-bottom:1px;transition:opacity .18s ease}
+.cta-web:hover{opacity:1}
+.final .cta-row{justify-content:center}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/posthog-js@latest/dist/array.full.js"></script>
 <script>posthog.init("phc_vUupVqSRdBay7mQ4Aswudhu8mFHnych6PKNRpP6BHoS4",{api_host:"https://us.i.posthog.com",person_profiles:"identified_only"});</script>
@@ -129,7 +134,7 @@ footer .links a{color:var(--purple-2);font-weight:700;font-size:14.5px;margin-le
 
 <nav><div class="wrap">
   <div class="logo">Corpus</div>
-  <a id="cta-nav" class="btn btn-primary" href="https://corpusapp.io">Open Corpus <span class="arrow">&#8594;</span></a>
+  <a id="cta-nav" class="btn btn-primary" href="https://apps.apple.com/app/id6781227385"><svg class="ic-apple" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 12.04c-.03-3.3 2.7-4.88 2.82-4.96-1.54-2.25-3.93-2.56-4.78-2.59-2.04-.2-3.98 1.2-5.02 1.2-1.04 0-2.63-1.17-4.32-1.14-2.22.03-4.28 1.29-5.42 3.28-2.31 4.01-.59 9.93 1.66 13.17 1.1 1.58 2.4 3.36 4.1 3.3 1.65-.07 2.27-1.07 4.26-1.07 1.99 0 2.56 1.07 4.3 1.04 1.78-.03 2.9-1.6 3.99-3.2 1.26-1.83 1.77-3.62 1.8-3.71-.04-.02-3.46-1.33-3.49-5.26zM13.96 4.1c.9-1.09 1.5-2.6 1.33-4.1-1.29.05-2.85.86-3.78 1.94-.83.96-1.56 2.5-1.36 3.97 1.44.11 2.91-.73 3.81-1.81z"/></svg><span class="cta-label">Get the app</span> <span class="arrow">&#8594;</span></a>
 </div></nav>
 
 <header class="hero"><div class="wrap"><div class="hero-grid">
@@ -137,7 +142,7 @@ footer .links a{color:var(--purple-2);font-weight:700;font-size:14.5px;margin-le
     <div class="eyebrow"><span class="tick"></span>Five minutes a day</div>
     <h1>History's greatest ideas, in five minutes a day.</h1>
     <p class="lead">Corpus turns philosophy and economics into short daily lessons built around the thinkers who shaped them: Socrates, Adam Smith, Kahneman, and more. An idea, a real source, then a question. Not lectures. Thinking.</p>
-    <div class="cta-row"><a id="cta-hero" class="btn btn-primary" href="https://corpusapp.io">Open Corpus <span class="arrow">&#8594;</span></a></div>
+    <div class="cta-row"><a id="cta-hero" class="btn btn-primary" href="https://apps.apple.com/app/id6781227385"><svg class="ic-apple" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 12.04c-.03-3.3 2.7-4.88 2.82-4.96-1.54-2.25-3.93-2.56-4.78-2.59-2.04-.2-3.98 1.2-5.02 1.2-1.04 0-2.63-1.17-4.32-1.14-2.22.03-4.28 1.29-5.42 3.28-2.31 4.01-.59 9.93 1.66 13.17 1.1 1.58 2.4 3.36 4.1 3.3 1.65-.07 2.27-1.07 4.26-1.07 1.99 0 2.56 1.07 4.3 1.04 1.78-.03 2.9-1.6 3.99-3.2 1.26-1.83 1.77-3.62 1.8-3.71-.04-.02-3.46-1.33-3.49-5.26zM13.96 4.1c.9-1.09 1.5-2.6 1.33-4.1-1.29.05-2.85.86-3.78 1.94-.83.96-1.56 2.5-1.36 3.97 1.44.11 2.91-.73 3.81-1.81z"/></svg><span class="cta-label">Download on the App Store</span> <span class="arrow">&#8594;</span></a><a id="cta-hero-web" class="cta-web" href="https://corpusapp.io">or try it in your browser</a></div>
     <div class="note">No feed. No filler. One real idea a day.</div>
   </div>
   <div class="hero-visual">
@@ -242,7 +247,7 @@ footer .links a{color:var(--purple-2);font-weight:700;font-size:14.5px;margin-le
 <section class="final"><div class="wrap reveal">
   <h2>Five minutes a day with thinkers like these.</h2>
   <p>That's Corpus. Open it, answer one question, and see what stays with you.</p>
-  <a id="cta-final" class="btn btn-primary" href="https://corpusapp.io" style="font-size:19px;padding:18px 38px">Open Corpus <span class="arrow">&#8594;</span></a>
+  <div class="cta-row"><a id="cta-final" class="btn btn-primary" href="https://apps.apple.com/app/id6781227385" style="font-size:19px;padding:18px 38px"><svg class="ic-apple" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 12.04c-.03-3.3 2.7-4.88 2.82-4.96-1.54-2.25-3.93-2.56-4.78-2.59-2.04-.2-3.98 1.2-5.02 1.2-1.04 0-2.63-1.17-4.32-1.14-2.22.03-4.28 1.29-5.42 3.28-2.31 4.01-.59 9.93 1.66 13.17 1.1 1.58 2.4 3.36 4.1 3.3 1.65-.07 2.27-1.07 4.26-1.07 1.99 0 2.56 1.07 4.3 1.04 1.78-.03 2.9-1.6 3.99-3.2 1.26-1.83 1.77-3.62 1.8-3.71-.04-.02-3.46-1.33-3.49-5.26zM13.96 4.1c.9-1.09 1.5-2.6 1.33-4.1-1.29.05-2.85.86-3.78 1.94-.83.96-1.56 2.5-1.36 3.97 1.44.11 2.91-.73 3.81-1.81z"/></svg><span class="cta-label">Download on the App Store</span> <span class="arrow">&#8594;</span></a><a id="cta-final-web" class="cta-web" href="https://corpusapp.io">or try it in your browser</a></div>
 </div></section>
 
 <footer><div class="wrap">
@@ -335,18 +340,24 @@ document.querySelectorAll('.reveal,.fan').forEach(function(n){io.observe(n);});
     });
   } catch(e) {}
 
-  // 3) landing_cta_clicked {location, destination:'app'} — all 4 outbound CTAs land in the app
+  // 3) landing_cta_clicked {location, destination} — destination is resolved from the
+  //    href at click time so the iOS/Android/desktop rewrites in the device-detect IIFE
+  //    are reflected accurately: 'app_store' for App Store URLs, 'web_app' for corpusapp.io.
   var ctas = [
-    { id: 'cta-nav',    location: 'nav'    },
-    { id: 'cta-hero',   location: 'hero'   },
-    { id: 'cta-final',  location: 'final'  },
-    { id: 'cta-footer', location: 'footer' }
+    { id: 'cta-nav',       location: 'nav'       },
+    { id: 'cta-hero',      location: 'hero'      },
+    { id: 'cta-final',     location: 'final'     },
+    { id: 'cta-footer',    location: 'footer'    },
+    { id: 'cta-hero-web',  location: 'hero_web'  },
+    { id: 'cta-final-web', location: 'final_web' }
   ];
   ctas.forEach(function(c){
     var el = document.getElementById(c.id);
     if (!el) return;
     el.addEventListener('click', function(){
-      cap('landing_cta_clicked', { location: c.location, destination: 'app' });
+      var href = el.getAttribute('href') || '';
+      var dest = /apps\.apple\.com/.test(href) ? 'app_store' : 'web_app';
+      cap('landing_cta_clicked', { location: c.location, destination: dest });
     });
   });
 
@@ -376,6 +387,42 @@ document.querySelectorAll('.reveal,.fan').forEach(function(n){io.observe(n);});
       cap('landing_quiz_answered', { answer: answer, correct: answer === 'C' });
     });
   });
+})();
+</script>
+<script>
+/* Device-aware CTA rewriting. The Corpus iOS app is live on the App Store but the
+   Android app isn't yet, so Android visitors are routed to the web app. iOS and
+   desktop get the App Store. Default HTML already points at the App Store, so this
+   only runs to (a) swap labels/href on Android and (b) hide the secondary "or try
+   in browser" link on mobile (iOS doesn't need it, Android already opens the web). */
+(function(){
+  var ua = navigator.userAgent || '';
+  var isIOS = /iPad|iPhone|iPod/.test(ua) || (/Mac/.test(ua) && (navigator.maxTouchPoints || 0) > 1);
+  var isAndroid = /Android/i.test(ua);
+  var APP_STORE = 'https://apps.apple.com/app/id6781227385';
+  var WEB_APP = 'https://corpusapp.io';
+
+  if (isAndroid) {
+    var androidLabel = { nav: 'Try the web app', hero: 'Try the web app', final: 'Try the web app' };
+    ['cta-nav','cta-hero','cta-final'].forEach(function(id){
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.href = WEB_APP;
+      var key = id.slice(4);
+      var labelEl = el.querySelector('.cta-label');
+      if (labelEl) labelEl.textContent = androidLabel[key];
+      var apple = el.querySelector('.ic-apple');
+      if (apple) apple.style.display = 'none';
+    });
+  }
+
+  // Hide the "or try it in your browser" link on mobile — iOS goes straight to the
+  // App Store (preferred), Android already opens the web app, so the secondary
+  // option is only meaningful on desktop.
+  if (isIOS || isAndroid) {
+    var webLinks = document.querySelectorAll('.cta-web');
+    for (var i = 0; i < webLinks.length; i++) webLinks[i].style.display = 'none';
+  }
 })();
 </script>
 </body>
