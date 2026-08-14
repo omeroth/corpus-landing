@@ -136,7 +136,27 @@ footer .links a{color:var(--purple-2);font-weight:700;font-size:14.5px;margin-le
 .final .cta-row{justify-content:center}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/posthog-js@latest/dist/array.full.js"></script>
-<script>posthog.init("phc_vUupVqSRdBay7mQ4Aswudhu8mFHnych6PKNRpP6BHoS4",{api_host:"https://us.i.posthog.com",person_profiles:"identified_only"});</script>
+<script>
+  // capture_pageview:false — the default (true) fires an initial $pageview
+  // synchronously during posthog.init(), before the register() call below
+  // can attach super properties. Disable it here, then fire $pageview
+  // manually right after register() so the initial pageview also carries
+  // source:'landing'. All later autocaptures (clicks, form submits, etc.)
+  // inherit the super property automatically because register() persists
+  // it to storage before any capture reads.
+  //
+  // capture_pageleave:true — required because posthog-js's default for
+  // capture_pageleave is 'if_capture_pageview' since v1.100, which would
+  // implicitly disable $pageleave when we set capture_pageview:false.
+  posthog.init("phc_vUupVqSRdBay7mQ4Aswudhu8mFHnych6PKNRpP6BHoS4", {
+    api_host: "https://us.i.posthog.com",
+    person_profiles: "identified_only",
+    capture_pageview: false,
+    capture_pageleave: true
+  });
+  posthog.register({ source: 'landing' });
+  posthog.capture('$pageview');
+</script>
 </head>
 <body>
 
