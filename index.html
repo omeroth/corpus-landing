@@ -74,8 +74,17 @@ img{max-width:100%;display:block}
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .nav .logo{font-size:22px;font-weight:900;letter-spacing:-0.02em;color:var(--purple)}
 .nav .cta-row{display:flex;align-items:center;gap:8px}
-.btn-pill{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 13px;border-radius:999px;background:var(--ink);color:#fff;font-size:13px;font-weight:800;text-decoration:none}
+.btn-pill{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 13px;border-radius:999px;background:var(--ink);color:#fff;font-size:13px;font-weight:800;text-decoration:none;white-space:nowrap}
 .btn-pill:hover{color:#fff;background:var(--ink-2)}
+/* At ≤ 359px the "Corpus" logo + 2 nav pills at default padding
+   overflow the 280px inner. Tighten pill padding + font here so
+   iPhone SE (320px) fits with a few px of breathing room. */
+@media(max-width:359px){
+  .nav .wrap{gap:8px}
+  .nav .cta-row{gap:6px}
+  .nav .logo{font-size:20px}
+  .btn-pill{padding:0 10px;font-size:12px;min-height:40px}
+}
 @media(min-width:900px){
   .nav{padding:24px 0}
   .nav .logo{font-size:26px}
@@ -141,14 +150,18 @@ img{max-width:100%;display:block}
   .hero-copy .lead{font-size:19px;line-height:1.55;max-width:460px}
 }
 .hero-actions{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:6px}
-.hero-actions .cta-row{display:flex;align-items:center;gap:12px}
-.btn-store{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 22px;border-radius:16px;background:var(--ink);color:#fff;font-size:16px;font-weight:900;text-decoration:none}
+/* Mobile: store buttons stack vertically full-width inside a capped
+   column, so the Google Play + App Store labels never overlap at
+   320/360/390. Row layout returns on desktop. */
+.hero-actions .cta-row{display:flex;flex-direction:column;align-items:stretch;width:100%;max-width:320px;gap:10px}
+.btn-store{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 22px;border-radius:16px;background:var(--ink);color:#fff;font-size:16px;font-weight:900;text-decoration:none;width:100%}
 .btn-store:hover{color:#fff;background:var(--ink-2)}
 .cta-web{color:var(--purple);font-size:15px;font-weight:700;min-height:44px;display:inline-flex;align-items:center}
 .hero-pull{font-size:14px;font-weight:700;color:var(--muted-2);text-align:center}
 @media(min-width:900px){
   .hero-actions{align-items:flex-start}
-  .btn-store{min-height:56px;padding:0 28px;font-size:17px}
+  .hero-actions .cta-row{flex-direction:row;align-items:center;max-width:none;width:auto;gap:12px}
+  .btn-store{min-height:56px;padding:0 28px;font-size:17px;width:auto}
   .cta-web{font-size:16px}
   .hero-pull{font-size:15px;text-align:start;margin-top:6px}
 }
@@ -233,10 +246,14 @@ img{max-width:100%;display:block}
 /* Subject cards: informational, so hover / tap is a small lift and a
    slightly deeper shadow — enough to feel alive, not enough to imply
    a click destination that doesn't exist. */
+/* Hover / tap: lift only. The subject-accent ring + shadow is
+   defined per-subject below and stays intact through the
+   interaction — a neutral shadow override here would repaint
+   the ring in the wrong colour on hover. */
 @media (hover: hover) {
-  .subj-card:hover{transform:translateY(-3px);box-shadow:0 14px 30px -12px rgba(42,18,102,0.28)}
+  .subj-card:hover{transform:translateY(-3px)}
 }
-.subj-card.tapped{transform:translateY(-3px);box-shadow:0 14px 30px -12px rgba(42,18,102,0.28)}
+.subj-card.tapped{transform:translateY(-3px)}
 .subj-portrait{flex:0 0 auto;width:110px;height:auto;position:relative;background:var(--bg);overflow:hidden}
 .subj-portrait img{width:100%;height:100%;object-fit:cover;object-position:center 22%;display:block}
 .subj-portrait::after{content:"";position:absolute;top:0;bottom:0;inset-inline-end:0;width:3px;background:currentColor}
@@ -245,16 +262,23 @@ img{max-width:100%;display:block}
 .subj-name{font-size:22px;font-weight:900;line-height:1.15;letter-spacing:-0.01em}
 .subj-tagline{font-size:14px;line-height:1.4;color:color-mix(in srgb,currentColor 65%,transparent);margin-top:2px}
 .subj-tag-badge{display:inline-block;margin-top:6px;padding:4px 10px;border-radius:999px;background:var(--orange-soft);color:var(--orange-body);font-size:12px;font-weight:800;align-self:flex-start}
-.subj-card.phil{color:var(--subj-phil)}
+/* Per-subject accent — border colour + soft glow shadow. All three
+   subjects now get the same treatment (previously only psychology,
+   via a .highlight class, which read as "psychology is special"
+   when the intent is "each subject has its own colour"). Shadow
+   is a two-stack: a 3px ring at low alpha for the accent halo,
+   plus a wider deeper shadow for lift. Retained across hover /
+   .tapped — the hover treatment is transform-only so the accent
+   ring stays visible during interaction. */
+.subj-card.phil{color:var(--subj-phil);border-color:var(--subj-phil);box-shadow:0 0 0 3px rgba(123,79,212,0.16),0 18px 40px -12px rgba(123,79,212,0.35)}
 .subj-card.phil .subj-portrait{color:var(--subj-phil)}
 .subj-card.phil .subj-name{color:var(--subj-phil)}
-.subj-card.econ{color:var(--subj-econ)}
+.subj-card.econ{color:var(--subj-econ);border-color:var(--subj-econ);box-shadow:0 0 0 3px rgba(37,99,235,0.16),0 18px 40px -12px rgba(37,99,235,0.35)}
 .subj-card.econ .subj-portrait{color:var(--subj-econ)}
 .subj-card.econ .subj-name{color:var(--subj-econ)}
-.subj-card.psych{color:var(--subj-psych)}
+.subj-card.psych{color:var(--subj-psych);border-color:var(--subj-psych);box-shadow:0 0 0 3px rgba(232,133,58,0.16),0 18px 40px -12px rgba(232,133,58,0.35)}
 .subj-card.psych .subj-portrait{color:var(--subj-psych)}
 .subj-card.psych .subj-name{color:var(--subj-psych)}
-.subj-card.highlight{border-color:var(--subj-psych);box-shadow:0 0 0 3px rgba(232,133,58,0.16),0 18px 40px -12px rgba(232,133,58,0.35)}
 @media(min-width:900px){
   .subjects{padding:120px 0 0}
   .subjects-head{margin-bottom:28px}
@@ -292,36 +316,38 @@ img{max-width:100%;display:block}
 
 /* ── Testimonials ────────────────────────────────────────────── */
 .praise{padding:44px 0 0}
+/* All six show on both mobile and desktop. Mobile is a single
+   column; desktop is a 3-col × 2-row grid. Quote text is verbatim
+   from git commit 4febc27 (the previous live landing page's
+   marquee). Five gold stars sit above each quote in both layouts. */
 .praise-grid{display:grid;grid-template-columns:1fr;gap:12px}
 .praise-card{margin:0;padding:20px;border-radius:20px;background:var(--surface);display:flex;flex-direction:column;justify-content:space-between;gap:10px}
+.praise-stars{color:var(--amber);font-size:16px;letter-spacing:2px;line-height:1}
 .praise-card blockquote{margin:0;font-size:20px;line-height:1.35;font-weight:800;color:var(--ink)}
 .praise-card.short blockquote{font-size:17px;line-height:1.45;font-weight:700}
 .praise-card figcaption{font-size:14px;color:var(--muted-2)}
-/* Six testimonials on desktop (3-col × 2 rows), two on mobile.
-   Yoni + Ido show on both; Noga, Nadav, Galit, and Adi are
-   marked .desktop-only so the mobile scroll stays short. The
-   full quote text comes from git commit 4febc27 (the previous
-   live landing page's marquee) so wording is verbatim.
-   Cadence rationale: three answers three objections (boring,
-   heavy, not for me — Yoni, Ido, Noga in that order); the
-   remaining three add depth on desktop where scroll cost is
-   negligible. */
-.praise-card.desktop-only{display:none}
 @media(min-width:900px){
   .praise{padding:110px 0 0}
   .praise-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
   .praise-card{padding:28px;border-radius:22px;gap:16px}
+  .praise-stars{font-size:18px;letter-spacing:3px}
   .praise-card blockquote{font-size:22px}
   .praise-card.short blockquote{font-size:19px;line-height:1.45}
   .praise-card figcaption{font-size:15px}
-  .praise-card.desktop-only{display:flex}
 }
 
 /* ── Final CTA ───────────────────────────────────────────────── */
 .final{padding:44px 0 0}
 .final .wrap>div{margin:0 16px;padding:28px 20px;border-radius:24px;background:var(--ink);color:#fff;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
 .final h2{margin:0;font-size:clamp(24px,6vw,40px);line-height:1.15;font-weight:900;letter-spacing:-0.02em;text-wrap:balance}
-.final-actions{align-self:stretch;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+/* Mobile: final-actions stacks store buttons vertically. Previous
+   grid-2-col layout squeezed each button into ~119px at 320px which
+   pushed the Google Play / App Store labels past the column edge —
+   the "overlap" bug. Column stack + full-width buttons fits every
+   supported width cleanly. */
+.final-actions{align-self:stretch;display:flex;flex-direction:column;gap:10px}
+.final-actions .cta-row{display:flex;flex-direction:column;gap:10px}
+.final-actions .btn-store-amber{width:100%}
 .final .cta-web{color:#fff}
 .final .cta-web:hover{color:#fff;opacity:0.8}
 @media(min-width:900px){
@@ -329,8 +355,8 @@ img{max-width:100%;display:block}
   .final .wrap>div{margin:0;padding:56px 64px;border-radius:32px;flex-direction:row;justify-content:space-between;text-align:start;gap:40px}
   .final h2{max-width:560px}
   .final-actions{align-self:auto;display:flex;flex-direction:column;gap:8px;align-items:center}
-  .final-actions .cta-row{display:flex;gap:12px}
-  .final-actions .btn-store-amber{min-height:58px;padding:0 28px;font-size:18px}
+  .final-actions .cta-row{flex-direction:row;gap:12px}
+  .final-actions .btn-store-amber{width:auto;min-height:58px;padding:0 28px;font-size:18px}
 }
 
 /* ── Footer ──────────────────────────────────────────────────── */
@@ -450,7 +476,7 @@ footer.foot{padding:36px 0 44px;display:flex;justify-content:center;font-size:13
         <div class="subj-tagline">Why markets, money and choices work the way they do.</div>
       </div>
     </div>
-    <div class="subj-card psych highlight">
+    <div class="subj-card psych">
       <div class="subj-portrait"><img src="images/freud.webp" width="500" height="896" loading="lazy" alt=""></div>
       <div class="subj-body">
         <div class="subj-byline">Freud · Kahneman · Jung</div>
@@ -483,26 +509,32 @@ footer.foot{padding:36px 0 44px;display:flex;justify-content:center;font-size:13
 <section class="praise"><div class="wrap">
   <div class="praise-grid">
     <figure class="praise-card">
+      <div class="praise-stars" aria-label="5 out of 5 stars">★★★★★</div>
       <blockquote>"Much better than staring at reels."</blockquote>
       <figcaption>Yoni</figcaption>
     </figure>
     <figure class="praise-card short">
+      <div class="praise-stars" aria-label="5 out of 5 stars">★★★★★</div>
       <blockquote>"What a joy to learn heavy subjects like philosophy in a way this light and fun."</blockquote>
       <figcaption>Ido</figcaption>
     </figure>
-    <figure class="praise-card short desktop-only">
+    <figure class="praise-card short">
+      <div class="praise-stars" aria-label="5 out of 5 stars">★★★★★</div>
       <blockquote>"It takes complex ideas and grounds them in everyday life. A lovely way to show people who don't think philosophy is for them that it clearly is."</blockquote>
       <figcaption>Noga</figcaption>
     </figure>
-    <figure class="praise-card short desktop-only">
+    <figure class="praise-card short">
+      <div class="praise-stars" aria-label="5 out of 5 stars">★★★★★</div>
       <blockquote>"One of the most encouraging things I've come across in a long time."</blockquote>
       <figcaption>Nadav</figcaption>
     </figure>
-    <figure class="praise-card short desktop-only">
+    <figure class="praise-card short">
+      <div class="praise-stars" aria-label="5 out of 5 stars">★★★★★</div>
       <blockquote>"It sparks curiosity and makes the ideas accessible, without provoking the resistance that usually gets in the way."</blockquote>
       <figcaption>Galit</figcaption>
     </figure>
-    <figure class="praise-card short desktop-only">
+    <figure class="praise-card short">
+      <div class="praise-stars" aria-label="5 out of 5 stars">★★★★★</div>
       <blockquote>"It expands what you know, simply and accessibly."</blockquote>
       <figcaption>Adi</figcaption>
     </figure>
